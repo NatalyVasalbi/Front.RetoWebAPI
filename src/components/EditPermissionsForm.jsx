@@ -1,5 +1,6 @@
 import React from "react";
 import {useForm} from 'react-hook-form';
+import SelectPermissionType from "./SelectPermissionType";
 
 const EditPermissionForm = (props) => {
 
@@ -35,8 +36,9 @@ const EditPermissionForm = (props) => {
             {errors.employeeLastName && <p>Campo requerido</p>}
 
             <label>Permission Type</label>
-            <input type='text' name='permissionType' {...register('permissionType', {required: true})}></input>
-            {errors.permissionType && <p>Campo requerido</p>}
+            {/* <input type='text' name='permissionType' {...register('permissionType', {required: true})}></input>
+            {errors.permissionType && <p>Campo requerido</p>} */}
+            <SelectPermissionType tipo={props.tipo} selectedTypePermission={props.selectedTypePermission} getSelectedPermissionType={props.getSelectedPermissionType}></SelectPermissionType>
 
             <label>Permission Date</label>
             <input type='text' name='permissionDate' {...register('permissionDate', {required: true})}></input>

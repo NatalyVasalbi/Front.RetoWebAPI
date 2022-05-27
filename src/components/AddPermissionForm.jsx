@@ -1,35 +1,19 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
 import {useForm} from 'react-hook-form';
-import  axios  from "axios";
+
+import SelectPermissionType from "./SelectPermissionType";
 
 const AddPermissionForm = (props) => {
 
     const {register, handleSubmit, formState: {errors}} = useForm();
-    const [selectedTypePermission, setSelectedTypePermission]=useState(0)
+    
 
     const onSubmit=(data, e)=>{
         // if(!data.employeeName || !data.employeeLastName) return
-        data.permissionType=selectedTypePermission;
+        data.permissionType=props.selectedTypePermission;
         props.addPermission(data);
         e.target.reset();
-    }
-
-    const [tipo, setTipo] = useState([{id:1, title: 'admin'},{id:2, title: 'usertest'}]);
-
-    useEffect(() => {
-        peticionGetTypes()
-      }, []);
-
-      const peticionGetTypes= async()=>{
-          const urlTypes="https://api.mercadolibre.com/sites/MLA/search?q=polo";
-          await axios
-          .get(urlTypes)
-          .then((response)=>{
-              console.log(response.data.results);
-              setTipo(response.data.results);
-            //   console.log(tipo)
-          });
-      };
+    }  
 
 
     return ( 
@@ -46,14 +30,7 @@ const AddPermissionForm = (props) => {
             <label>Permission Type</label>
             {/* <input type='text' name='permissionType' {...register('permissionType', {required: true})}></input>
             {errors.permissionType && <p>Campo requerido</p>} */}
-            <select name="permissionType" className="form-control"
-            defaultValue={selectedTypePermission}
-            onChange={(e)=>setSelectedTypePermission(e.target.value)}>
-                {tipo.map((elemento) => (
-                    <option key={elemento.id} value={elemento.id}>{elemento.title}</option>
-                ))}
-            </select>
-
+            <SelectPermissionType tipo={props.tipo} selectedTypePermission={props.selectedTypePermission} getSelectedPermissionType={props.getSelectedPermissionType}></SelectPermissionType>
             <label>Permission Date</label>
             <input type='text' name='permissionDate' {...register('permissionDate', {required: true})}></input>
             {errors.permissionDate && <p>Campo requerido</p>}

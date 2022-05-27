@@ -1,10 +1,11 @@
 import logo from "./logo_n5.png";
 import "./App.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PermissionTable from "./components/PermissionTable";
 import { v4 as uuidv4 } from "uuid";
 import AddPermissionForm from "./components/AddPermissionForm";
 import EditPermissionForm from "./components/EditPermissionsForm";
+import  axios  from "axios";
 
 function App() {
   const permissionsData = [
@@ -77,11 +78,34 @@ function App() {
   };
 
 
+  useEffect(() => {
+    peticionGetTypes()
+  }, []);
+
+  const [tipo, setTipo] = useState([{id:1, title: 'admin'},{id:2, title: 'usertest'}]);
+
+  const peticionGetTypes= async()=>{
+      const urlTypes="https://api.mercadolibre.com/sites/MLA/search?q=polo";
+      await axios
+      .get(urlTypes)
+      .then((response)=>{
+          console.log(response.data.results);
+          setTipo(response.data.results);
+        //   console.log(tipo)
+      });
+  };
+
+  const [selectedTypePermission, setSelectedTypePermission]=useState(0)
+  const getSelectedPermissionType=(value)=>{
+    setSelectedTypePermission(value);
+  }
+
+
 
   return (
     <div className="App">
       <div className="container">
-        <img src={logo} alt="logo" />
+        {/* <img src={logo} alt="logo" /> */}
         <h1>CRUD APP WITH REACT HOOKS</h1>
         <div className="flex-row">
           <div className="flex-large">
@@ -91,13 +115,19 @@ function App() {
                 <EditPermissionForm
                   currentPermission={currentPermission}
                   updatePermission={updatePermission}
+                  getSelectedPermissionType={getSelectedPermissionType}
+                  selectedTypePermission={selectedTypePermission}
+                  tipo={tipo}
                 ></EditPermissionForm>
               </div>
             ) : (
               <div className="flex-large">
                 <h2>ADD PERMISSIONS</h2>
                 <AddPermissionForm
-                  addPermission={addPermission}                  
+                  addPermission={addPermission}
+                  getSelectedPermissionType={getSelectedPermissionType}
+                  selectedTypePermission={selectedTypePermission}
+                  tipo={tipo}
                 ></AddPermissionForm>
               </div>
             )}
