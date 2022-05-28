@@ -7,7 +7,7 @@ import AddPermissionForm from "./components/AddPermissionForm";
 import EditPermissionForm from "./components/EditPermissionsForm";
 import  axios  from "axios";
 
-function App() {
+function App() {  
   const permissionsData = [
     {
       id: uuidv4(),
@@ -101,6 +101,13 @@ function App() {
   }
 
 
+  const [selectedPermissionDate, setSelectedPermissionDate]=useState(new Date())
+
+  const getPermissionDate=(date)=>{
+    setSelectedPermissionDate(date);
+  }
+  
+
 
   return (
     <div className="App">
@@ -128,6 +135,8 @@ function App() {
                   getSelectedPermissionType={getSelectedPermissionType}
                   selectedTypePermission={selectedTypePermission}
                   tipo={tipo}
+                  selectedPermissionDate={selectedPermissionDate}
+                  getPermissionDate={getPermissionDate}
                 ></AddPermissionForm>
               </div>
             )}
