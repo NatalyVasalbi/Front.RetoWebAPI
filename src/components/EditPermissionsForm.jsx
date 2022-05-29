@@ -1,5 +1,6 @@
 import React from "react";
 import {useForm} from 'react-hook-form';
+import DatePickerPermission from "./DatePickerPermission";
 import SelectPermissionType from "./SelectPermissionType";
 
 const EditPermissionForm = (props) => {
@@ -10,9 +11,8 @@ const EditPermissionForm = (props) => {
     });
     setValue('employeeName', props.currentPermission.employeeName);
     setValue('employeeLastName', props.currentPermission.employeeLastName)
-    setValue('permissionTypeId', props.currentPermission.permissionTypeId)
-    setValue('permissionDate', props.currentPermission.permissionDate)
-    
+    // setValue('permissionTypeId', props.currentPermission.permissionTypeId)
+    // setValue('permissionDate', props.currentPermission.permissionDate)
 
 
     const onSubmit=(data, e)=>{
@@ -41,8 +41,9 @@ const EditPermissionForm = (props) => {
             <SelectPermissionType tipo={props.tipo} selectedTypePermission={props.currentPermission.permissionTypeId} getSelectedPermissionType={props.getSelectedPermissionType}></SelectPermissionType>
 
             <label>Permission Date</label>
-            <input type='text' name='permissionDate' {...register('permissionDate', {required: true})}></input>
-            {errors.permissionDate && <p>Campo requerido</p>}
+            {/* <input type='text' name='permissionDate' {...register('permissionDate', {required: true})}></input>
+            {errors.permissionDate && <p>Campo requerido</p>} */}
+            <DatePickerPermission selectedPermissionDate={props.currentPermission.permissionDate} getPermissionDate={props.getPermissionDate}></DatePickerPermission>
             
             <button>Edit Permission</button>
         </form>

@@ -10,7 +10,7 @@ const DatePickerPermission = (props) => {
     
     return (
             <DatePicker 
-        selected={props.selectedPermissionDate} 
+        selected={new Date(props.selectedPermissionDate)}         
         onChange={date => props.getPermissionDate(date)}
         locale="es"
         dateFormat='dd/MM/yyyy'

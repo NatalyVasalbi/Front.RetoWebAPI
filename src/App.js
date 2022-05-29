@@ -52,7 +52,9 @@ function App() {
 
   // Eliminar permission
   const deletePermission = (id) => {
-    setPermissions(permissions.filter((permission) => permission.id !== id));
+    // setPermissions(permissions.filter((permission) => permission.id !== id));
+    axios.delete(`http://localhost:5000/Permissions/${id}`)
+    .then(()=>console.log('Delete sucessful'))
   };
 
   // Editar permissions
@@ -72,18 +74,29 @@ function App() {
       employeeName: p.employeeName,
       employeeLastName: p.employeeLastName,
       permissionTypeId: p.permissionTypeId,
-      permissionDate: new Date(p.permissionDate).toLocaleDateString('es-ES')      
-    });    
+      permissionDate: p.permissionDate      
+    });
+    console.log("FECHA CURRENT: "+p.permissionDate)
   };
 
   // Actualizar permissions
   const updatePermission = (id, updatePermission) => {
     setEditing(false);
-    setPermissions(
-      permissions.map((permission) =>
-        permission.id === id ? updatePermission : permission
-      )
-    );
+    // setPermissions(
+    //   permissions.map((permission) =>
+    //     permission.id === id ? updatePermission : permission
+    //   )
+    // );
+    const data={
+      id: id,
+      employeeName: updatePermission.employeeName,
+      employeeLastName: updatePermission.employeeLastName,
+      permissionTypeId: updatePermission.permissionTypeId,
+      permissionDate: updatePermission.permissionDate
+    };
+    axios.put('http://localhost:5000/Permissions', data)
+    .then(response=>{console.log("Status: ", response.status);})
+    .catch(error=>{console.error('Something went wrong!', error);})
   };
 
 
