@@ -17,7 +17,7 @@ const PermissionTable = (props) => (
             <tr key={permission.id}>
               <td>{permission.employeeName}</td>
               <td>{permission.employeeLastName}</td>
-              <td>{permission.permissionType}</td>
+              <td>{permission.permissionType.description}</td>
               <td>{permission.permissionDate}</td>
               <td>
                 <button className="button muted-button" onClick={()=>{props.editRow(permission)}}>Edit</button>

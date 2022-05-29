@@ -33,7 +33,7 @@ function App() {
   ];
 
   //state
-  const [permissions, setPermissions] = useState(permissionsData);
+  const [permissions, setPermissions] = useState([]);
 
   // Agregar permission
   const addPermission = (permission) => {
@@ -79,19 +79,26 @@ function App() {
 
 
   useEffect(() => {
+    getPermissions()
     peticionGetTypes()
   }, []);
 
-  const [tipo, setTipo] = useState([{id:1, title: 'admin'},{id:2, title: 'usertest'}]);
+  const [tipo, setTipo] = useState([]);
 
   const peticionGetTypes= async()=>{
-      const urlTypes="https://api.mercadolibre.com/sites/MLA/search?q=polo";
+      const urlTypes="http://localhost:5000/PermissionTypes";
       await axios
       .get(urlTypes)
       .then((response)=>{
-          console.log(response.data.results);
-          setTipo(response.data.results);
-        //   console.log(tipo)
+          setTipo(response.data);
+      });
+  };
+  const getPermissions= async()=>{
+      const urlTypes="http://localhost:5000/Permissions";
+      await axios
+      .get(urlTypes)
+      .then((response)=>{
+          setPermissions(response.data);
       });
   };
 

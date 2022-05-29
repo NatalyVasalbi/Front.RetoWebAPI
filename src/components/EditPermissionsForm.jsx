@@ -10,7 +10,7 @@ const EditPermissionForm = (props) => {
     });
     setValue('employeeName', props.currentPermission.employeeName);
     setValue('employeeLastName', props.currentPermission.employeeLastName)
-    setValue('permissionType', props.currentPermission.permissionType)
+    setValue('permissionTypeId', props.currentPermission.permissionTypeId)
     setValue('permissionDate', props.currentPermission.permissionDate)
     
 
