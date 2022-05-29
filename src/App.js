@@ -37,8 +37,18 @@ function App() {
 
   // Agregar permission
   const addPermission = (permission) => {
-    permission.id = uuidv4();
-    setPermissions([...permissions, permission]);
+    // permission.id = uuidv4();
+    // setPermissions([...permissions, permission]);
+    const data={
+      employeeName: permission.employeeName,
+      employeeLastName: permission.employeeLastName,
+      permissionTypeId: permission.permissionTypeId,
+      permissionDate: "2022-05-29T00:10:52.126Z"
+    };
+    console.log("DATA: "+ data)
+    axios.post('http://localhost:5000/Permissions', data)
+    .then(response=>{console.log("Status: ", response.status);})
+    .catch(error=>{console.error('Something went wrong!', error);})
   };
 
   // Eliminar permission
@@ -81,7 +91,7 @@ function App() {
   useEffect(() => {
     getPermissions()
     peticionGetTypes()
-  }, []);
+  }, [permissions]);
 
   const [tipo, setTipo] = useState([]);
 
@@ -102,7 +112,7 @@ function App() {
       });
   };
 
-  const [selectedTypePermission, setSelectedTypePermission]=useState(0)
+  const [selectedTypePermission, setSelectedTypePermission]=useState(1)
   const getSelectedPermissionType=(value)=>{
     setSelectedTypePermission(value);
   }
