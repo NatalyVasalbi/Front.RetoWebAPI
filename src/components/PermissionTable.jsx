@@ -18,7 +18,7 @@ const PermissionTable = (props) => (
               <td>{permission.employeeName}</td>
               <td>{permission.employeeLastName}</td>
               <td>{permission.permissionType.description}</td>
-              <td>{permission.permissionDate}</td>
+              <td>{new Date(permission.permissionDate).toLocaleDateString('es-ES')}</td>              
               <td>
                 <button className="button muted-button" onClick={()=>{props.editRow(permission)}}>Edit</button>
                 <button className="button muted-button" onClick={()=>{props.deletePermission(permission.id)}}>Delete</button>

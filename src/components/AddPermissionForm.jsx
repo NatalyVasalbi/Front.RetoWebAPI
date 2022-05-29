@@ -12,9 +12,7 @@ const AddPermissionForm = (props) => {
     const onSubmit=(data, e)=>{
         // if(!data.employeeName || !data.employeeLastName) return
         data.permissionTypeId=props.selectedTypePermission;
-        const fecha= props.selectedPermissionDate;
-        const options = {year: 'numeric', month: 'numeric', day: 'numeric'}
-        data.permissionDate= fecha.toLocaleDateString('es-ES', options);
+        data.permissionDate=props.selectedPermissionDate;
         props.addPermission(data);
         e.target.reset();
     }  

@@ -43,9 +43,8 @@ function App() {
       employeeName: permission.employeeName,
       employeeLastName: permission.employeeLastName,
       permissionTypeId: permission.permissionTypeId,
-      permissionDate: "2022-05-29T00:10:52.126Z"
+      permissionDate: permission.permissionDate
     };
-    console.log("DATA: "+ data)
     axios.post('http://localhost:5000/Permissions', data)
     .then(response=>{console.log("Status: ", response.status);})
     .catch(error=>{console.error('Something went wrong!', error);})
@@ -72,9 +71,9 @@ function App() {
       id: p.id,
       employeeName: p.employeeName,
       employeeLastName: p.employeeLastName,
-      permissionType: p.permissionType,
-      permissionDate: p.permissionDate,
-    });
+      permissionTypeId: p.permissionTypeId,
+      permissionDate: new Date(p.permissionDate).toLocaleDateString('es-ES')      
+    });    
   };
 
   // Actualizar permissions

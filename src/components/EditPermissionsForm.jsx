@@ -38,7 +38,7 @@ const EditPermissionForm = (props) => {
             <label>Permission Type</label>
             {/* <input type='text' name='permissionType' {...register('permissionType', {required: true})}></input>
             {errors.permissionType && <p>Campo requerido</p>} */}
-            <SelectPermissionType tipo={props.tipo} selectedTypePermission={props.selectedTypePermission} getSelectedPermissionType={props.getSelectedPermissionType}></SelectPermissionType>
+            <SelectPermissionType tipo={props.tipo} selectedTypePermission={props.currentPermission.permissionTypeId} getSelectedPermissionType={props.getSelectedPermissionType}></SelectPermissionType>
 
             <label>Permission Date</label>
             <input type='text' name='permissionDate' {...register('permissionDate', {required: true})}></input>
